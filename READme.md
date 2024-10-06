@@ -11,102 +11,102 @@ Beautie merupakan website yang menyediakan beragam produk skincare dan makeup se
 Berikut adalah deskripsi untuk struktur tabel yang akan dimasukkan ke database:
 
 #### categories (Kategori Produk):
-category_id: ID unik untuk setiap kategori (Primary Key).
-main_category: Kategori utama produk.
-sub_category: Sub-kategori dari kategori utama.
-description: Deskripsi kategori.
-created_at: Waktu pembuatan kategori, secara default diset ke waktu saat ini.
+- **category_id:** ID unik untuk setiap kategori (Primary Key).
+- **main_category:** Kategori utama produk.
+- **sub_category:** Sub-kategori dari kategori utama.
+- **description:** Deskripsi kategori.
+- **created_at:** Waktu pembuatan kategori, secara default diset ke waktu saat ini.
 
 #### products (Produk):
-product_id: ID unik untuk setiap produk (Primary Key).
-product_name: Nama produk.
-category_id: ID kategori dari tabel categories, menghubungkan produk ke kategorinya (Foreign Key).
-cogs: Cost of Goods Sold (harga pokok penjualan) dari produk.
-price: Harga jual produk.
-stock_quantity: Jumlah stok produk yang tersedia.
-description: Deskripsi produk.
-product_image_url: URL gambar produk.
-created_at: Waktu pembuatan produk.
+- **product_id**: ID unik untuk setiap produk (Primary Key).
+- **product_name**: Nama produk.
+- **category_id**: ID kategori dari tabel categories, menghubungkan produk ke kategorinya (Foreign Key).
+- **cogs**: Cost of Goods Sold (harga pokok penjualan) dari produk.
+- **price**: Harga jual produk.
+- **stock_quantity**: Jumlah stok produk yang tersedia.
+- **description** : Deskripsi produk.
+- **product_image_url**: URL gambar produk.
+- **created_at**: Waktu pembuatan produk.
 
-#### customers (Pelanggan):
-customer_id: ID unik untuk setiap pelanggan (Primary Key).
-first_name: Nama depan pelanggan.
-last_name: Nama belakang pelanggan.
-email: Email pelanggan (unik).
-phone: Nomor telepon pelanggan.
-address: Alamat pelanggan.
-gender: Jenis kelamin pelanggan.
-city: Kota tempat tinggal pelanggan.
-created_at: Waktu pembuatan akun pelanggan.
+### customers (Pelanggan):
+- **customer_id**: ID unik untuk setiap pelanggan *(Primary Key)*.
+- **first_name**: Nama depan pelanggan.
+- **last_name**: Nama belakang pelanggan.
+- **email**: Email pelanggan *(unik)*.
+- **phone**: Nomor telepon pelanggan.
+- **address**: Alamat pelanggan.
+- **gender**: Jenis kelamin pelanggan.
+- **city**: Kota tempat tinggal pelanggan.
+- **created_at**: Waktu pembuatan akun pelanggan.
 
-#### orders (Pesanan):
-order_id: ID unik untuk setiap pesanan (Primary Key).
-customer_id: ID pelanggan yang melakukan pesanan (Foreign Key).
-order_date: Tanggal pesanan dilakukan, secara default diset ke waktu saat ini.
-status: Status pesanan.
-total_amount: Total nilai pesanan.
-shipping_address: Alamat pengiriman pesanan.
-created_at: Waktu pembuatan pesanan.
+### orders (Pesanan):
+- **order_id**: ID unik untuk setiap pesanan *(Primary Key)*.
+- **customer_id**: ID pelanggan yang melakukan pesanan *(Foreign Key)*.
+- **order_date**: Tanggal pesanan dilakukan, secara default diset ke waktu saat ini.
+- **status**: Status pesanan *(Pending, Processed, Shipped, Delivered, Cancelled)*.
+- **total_amount**: Total nilai pesanan.
+- **shipping_address**: Alamat pengiriman pesanan.
+- **created_at**: Waktu pembuatan pesanan.
 
-#### order_items (Detail Pesanan):
-order_item_id: ID unik untuk setiap item pesanan (Primary Key).
-order_id: ID pesanan terkait (Foreign Key).
-product_id: ID produk yang dipesan (Foreign Key).
-quantity: Jumlah produk yang dipesan.
-unit_price: Harga satuan produk saat pemesanan.
-subtotal: Total harga untuk item pesanan (quantity × unit_price).
+### order_items (Detail Pesanan):
+- **order_item_id**: ID unik untuk setiap item pesanan *(Primary Key)*.
+- **order_id**: ID pesanan terkait *(Foreign Key)*.
+- **product_id**: ID produk yang dipesan *(Foreign Key)*.
+- **quantity**: Jumlah produk yang dipesan.
+- **unit_price**: Harga satuan produk saat pemesanan.
+- **subtotal**: Total harga untuk item pesanan *(quantity × unit_price)*.
 
-#### payments (Pembayaran):
-payment_id: ID unik untuk setiap pembayaran (Primary Key).
-order_id: ID pesanan terkait (Foreign Key).
-payment_date: Tanggal pembayaran dilakukan.
-payment_method: Metode pembayaran yang digunakan pelanggan.
-payment_amount: Jumlah yang dibayarkan, sesuai dengan total_amount pesanan.
+### payments (Pembayaran):
+- **payment_id**: ID unik untuk setiap pembayaran *(Primary Key)*.
+- **order_id**: ID pesanan terkait *(Foreign Key)*.
+- **payment_date**: Tanggal pembayaran dilakukan.
+- **payment_method**: Metode pembayaran *(misalnya, COD, E-wallet)*.
+- **payment_amount**: Jumlah yang dibayarkan, sesuai dengan total_amount pesanan.
 
-#### shipping (Pengiriman):
-shipping_id: ID unik untuk setiap pengiriman (Primary Key).
-order_id: ID pesanan yang dikirim (Foreign Key).
-shipping_method: Metode pengiriman yang digunakan pelanggan.
-shipping_cost: Biaya pengiriman yang dibayar pelanggan.
-shipping_status: Status pengiriman.
-shipped_date: Tanggal pengiriman dilakukan.
-estimated_delivery: Estimasi tanggal barang diterima.
+### shipping (Pengiriman):
+- **shipping_id**: ID unik untuk setiap pengiriman *(Primary Key)*.
+- **order_id**: ID pesanan yang dikirim *(Foreign Key)*.
+- **shipping_method**: Metode pengiriman yang digunakan *(misalnya, JNE, JNT)*.
+- **shipping_cost**: Biaya pengiriman.
+- **shipping_status**: Status pengiriman *(misalnya, Shipped, In Transit)*.
+- **shipped_date**: Tanggal pengiriman dilakukan.
+- **estimated_delivery**: Estimasi tanggal barang diterima.
 
-#### feedbacks (Ulasan):
-feedback_id: ID unik untuk setiap ulasan (Primary Key).
-product_id: ID produk yang diulas (Foreign Key).
-customer_id: ID pelanggan yang memberikan ulasan (Foreign Key).
-rating: Nilai rating produk.
-skin_types: Jenis kulit pelanggan.
-review: Komentar atau ulasan pelanggan.
-created_at: Waktu ulasan dibuat.
+### feedbacks (Ulasan):
+- **feedback_id**: ID unik untuk setiap ulasan *(Primary Key)*.
+- **product_id**: ID produk yang diulas *(Foreign Key)*.
+- **customer_id**: ID pelanggan yang memberikan ulasan *(Foreign Key)*.
+- **rating**: Nilai rating produk *(misalnya, 1–5)*.
+- **skin_types**: Jenis kulit pelanggan *(untuk produk skincare)*.
+- **review**: Komentar atau ulasan pelanggan.
+- **created_at**: Waktu ulasan dibuat.
 
-#### carts (Keranjang Belanja):
-cart_id: ID unik untuk setiap keranjang belanja (Primary Key).
-customer_id: ID pelanggan yang memiliki keranjang (Foreign Key).
-product_id: ID produk yang ditambahkan ke keranjang (Foreign Key).
-quantity_cart: Jumlah produk dalam keranjang.
-created_at: Waktu produk ditambahkan ke keranjang.
+### carts (Keranjang Belanja):
+- **cart_id**: ID unik untuk setiap keranjang belanja *(Primary Key)*.
+- **customer_id**: ID pelanggan yang memiliki keranjang *(Foreign Key)*.
+- **product_id**: ID produk yang ditambahkan ke keranjang *(Foreign Key)*.
+- **quantity_cart**: Jumlah produk dalam keranjang.
+- **created_at**: Waktu produk ditambahkan ke keranjang.
 
-#### wishlists (Daftar Keinginan):
-wishlist_id: ID unik untuk setiap wishlist (Primary Key).
-customer_id: ID pelanggan yang membuat wishlist (Foreign Key).
-product_id: ID produk dalam wishlist (Foreign Key).
-created_at: Waktu produk ditambahkan ke wishlist.
+### wishlists (Daftar Keinginan):
+- **wishlist_id**: ID unik untuk setiap wishlist *(Primary Key)*.
+- **customer_id**: ID pelanggan yang membuat wishlist *(Foreign Key)*.
+- **product_id**: ID produk dalam wishlist *(Foreign Key)*.
+- **created_at**: Waktu produk ditambahkan ke wishlist.
 
-#### promotions (Promosi):
-promotion_id: ID unik untuk setiap promosi (Primary Key).
-promotion_name: Nama promosi.
-product_id: ID produk yang dipromosikan (Foreign Key).
-discount_percentage: Persentase diskon yang diberikan.
-start_date: Tanggal mulai promosi.
-end_date: Tanggal akhir promosi.
+### promotions (Promosi):
+- **promotion_id**: ID unik untuk setiap promosi *(Primary Key)*.
+- **promotion_name**: Nama promosi.
+- **product_id**: ID produk yang dipromosikan *(Foreign Key)*.
+- **discount_percentage**: Persentase diskon yang diberikan.
+- **start_date**: Tanggal mulai promosi.
+- **end_date**: Tanggal akhir promosi.
 
 ## Relasi antar table:
 
-*One-to-Many:* categories → products, customers → orders, orders → order_items, products → feedbacks, products → order_items.
-*One-to-One:* orders → payments, orders → shipping.
-*Many-to-Many* customers → products via carts dan wishlists.
+**One-to-Many:** categories → products, customers → orders, orders → order_items, products → feedbacks, products → order_items.
+**One-to-One:** orders → payments, orders → shipping.
+**Many-to-Many** customers → products via carts dan wishlists.
 
 ## ERD
 
